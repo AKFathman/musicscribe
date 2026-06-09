@@ -170,6 +170,22 @@ key — leave it unset for a purely public, self-service deployment.)
 > host in memory for the duration of that request. Only share the link with people
 > comfortable with that, and prefer running it somewhere you control.
 
+### Deploy to Render (permanent URL)
+
+The repo ships a [`render.yaml`](render.yaml) blueprint and runs under `gunicorn`,
+so it deploys to [Render](https://render.com)'s free tier with no secrets to set
+(BYOK — visitors bring their own key):
+
+1. Push this repo to GitHub (already at `github.com/AKFathman/musicscribe`).
+2. In Render: **New + → Blueprint**, connect the repo (or use **Public Git Repository**
+   and paste the repo URL).
+3. Render reads `render.yaml`, shows the `musicscribe` web service on the **free** plan
+   — click **Apply**.
+4. After the build you get a permanent `https://musicscribe.onrender.com`-style URL.
+
+The free plan sleeps after ~15 min idle, so the first request after a lull takes
+~30–60s to wake; it's instant after that.
+
 ---
 
 ## Configuration
