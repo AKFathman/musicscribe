@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vibe Writer</title>
+<style>
+  :root {
+    --bg: #0f1020;
+    --panel: #181a2e;
+    --panel-2: #20233c;
+    --ink: #ECECF4;
+    --muted: #9aa0c0;
+    --accent: #c98a5e;
+    --accent-2: #7c6cf0;
+    --green: #6fcf97;
+    --line: #2a2d4a;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 80% -10%, #21243f 0%, var(--bg) 55%) fixed;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; }
+  header { text-align: center; margin-bottom: 28px; }
+  h1 { font-size: 30px; margin: 0 0 6px; letter-spacing: -0.02em; }
+  h1 .note { color: var(--accent); }
+  .sub { color: var(--muted); font-size: 15px; margin: 0; }
+  .tabs { display: flex; gap: 8px; background: var(--panel); padding: 6px; border-radius: 999px; width: fit-content; margin: 22px auto 26px; border: 1px solid var(--line); }
+  .tab { border: 0; background: transparent; color: var(--muted); padding: 9px 18px; border-radius: 999px; cursor: pointer; font-size: 14px; font-weight: 600; transition: .15s; }
+  .tab.active { background: var(--accent-2); color: white; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  label { display: block; font-size: 13px; color: var(--muted); margin: 0 0 6px; font-weight: 600; }
+  textarea, input {
+    width: 100%; background: var(--panel-2); border: 1px solid var(--line); color: var(--ink);
+    border-radius: 10px; padding: 12px 14px; font-size: 15px; font-family: inherit; resize: vertical;
+  }
+  textarea:focus, input:focus { outline: none; border-color: var(--accent-2); }
+  .row { display: flex; gap: 12px; }
+  .row > div { flex: 1; }
+  .field { margin-bottom: 14px; }
+  button.go {
+    margin-top: 6px; width: 100%; border: 0; border-radius: 10px; padding: 13px; font-size: 15px;
+    font-weight: 700; color: white; cursor: pointer; background: linear-gradient(135deg, var(--accent-2), #5a4ad1);
+  }
+  button.go:disabled { opacity: .55; cursor: progress; }
+  .hint { color: var(--muted); font-size: 12.5px; margin-top: 8px; }
+  .results { margin-top: 22px; display: flex; flex-direction: column; gap: 16px; }
+  .card { background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+  .card .eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .tone-name { font-size: 22px; font-weight: 700; color: var(--accent); text-transform: capitalize; }
+  .conf { color: var(--muted); font-size: 13px; font-weight: 500; }
+  .tone-desc { color: var(--muted); font-size: 14px; margin-top: 4px; }
+  .chips { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { background: #2a2d4a; color: #cdd2f0; font-size: 12.5px; padding: 4px 10px; border-radius: 999px; }
+  .secondary { margin-top: 10px; font-size: 13px; color: var(--muted); }
+  .secondary b { color: #b9a0f0; font-weight: 600; text-transform: capitalize; }
+  .read { margin-top: 12px; font-size: 14px; color: var(--ink); font-style: italic; }
+  .song-title { font-size: 20px; font-weight: 700; color: var(--green); }
+  .song-artist { color: var(--muted); font-weight: 500; }
+  .why { margin-top: 10px; font-size: 14.5px; }
+  .prose { white-space: pre-wrap; font-size: 15.5px; line-height: 1.7; }
+  .prose .caret { color: var(--accent-2); animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .err { color: #ff8b8b; background: #2a1a26; border: 1px solid #5a2a3a; border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+  .spinner { color: var(--muted); font-size: 14px; }
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 36px; }
+  .hidden { display: none; }
+  /* API key bar */
+  .keybar { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 18px; }
+  .keybar .krow { display: flex; gap: 10px; align-items: center; }
+  .keybar input { flex: 1; }
+  .keybar button { border: 0; border-radius: 10px; padding: 11px 16px; font-weight: 700; cursor: pointer; background: var(--accent); color: #21130a; }
+  .keybar button.secondary { background: #2a2d4a; color: var(--ink); font-weight: 600; }
+  .keystate { font-size: 12.5px; margin-top: 9px; color: var(--muted); }
+  .keystate.ok { color: var(--green); }
+  .keynote { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+  .keynote a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🎵 Vibe <span class="note">Writer</span></h1>
+    <p class="sub">Writing has a vibe. So does music. This tool reads one and gives you the other.</p>
+  </header>
+
+  <div class="keybar">
+    <div class="krow">
+      <input id="api-key" type="password" placeholder="Your Anthropic API key (sk-ant-…)" autocomplete="off" spellcheck="false" />
+      <button id="key-save">Save</button>
+      <button id="key-clear" class="secondary">Clear</button>
+    </div>
+    <div class="keystate" id="key-state">No key set — add yours to begin.</div>
+    <div class="keynote">
+      Bring your own key: it's stored only in <b>this browser</b> (localStorage) and sent
+      over HTTPS with each request so the server can call Claude on your behalf — it is
+      never stored or logged on the server. Get a key at
+      <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a>.
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-mode="text">Text → Song</button>
+    <button class="tab" data-mode="song">Song → Writing</button>
+  </div>
+
+  <!-- MODE 1 -->
+  <section id="mode-text" class="panel">
+    <div class="field">
+      <label for="text-in">Paste a piece of writing</label>
+      <textarea id="text-in" rows="6" placeholder="A paragraph, a poem, a journal entry…"></textarea>
+    </div>
+    <button class="go" id="text-go">Find the vibe →</button>
+    <p class="hint">Classifies the tone, then recommends a song that matches it.</p>
+    <div class="results" id="text-results"></div>
+  </section>
+
+  <!-- MODE 2 -->
+  <section id="mode-song" class="panel hidden">
+    <div class="row">
+      <div class="field">
+        <label for="song-title">Song title</label>
+        <input id="song-title" placeholder="Mr. Brightside" />
+      </div>
+      <div class="field">
+        <label for="song-artist">Artist</label>
+        <input id="song-artist" placeholder="The Killers" />
+      </div>
+    </div>
+    <div class="field">
+      <label for="song-prompt">Writing prompt</label>
+      <textarea id="song-prompt" rows="4" placeholder="Describe a morning commute on a crowded train."></textarea>
+    </div>
+    <button class="go" id="song-go">Write it in that tone →</button>
+    <p class="hint">Classifies the song's vibe, then writes your prompt in it.</p>
+    <div class="results" id="song-results"></div>
+  </section>
+
+  <footer>Powered by the Anthropic Claude API · tone taxonomy shared across both modes</footer>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+
+// --- API key (bring-your-own, stored in this browser only) ---
+const KEY_STORE = "vibewriter_api_key";
+
+function getKey() {
+  return ($("#api-key").value || "").trim();
+}
+function refreshKeyState() {
+  const k = getKey();
+  const el = $("#key-state");
+  if (k) {
+    el.textContent = "Key set ✓ (kept in this browser only)";
+    el.classList.add("ok");
+  } else {
+    el.textContent = "No key set — add yours to begin.";
+    el.classList.remove("ok");
+  }
+}
+(function initKey() {
+  try {
+    const saved = localStorage.getItem(KEY_STORE);
+    if (saved) $("#api-key").value = saved;
+  } catch (e) {}
+  refreshKeyState();
+})();
+$("#key-save").addEventListener("click", () => {
+  try { localStorage.setItem(KEY_STORE, getKey()); } catch (e) {}
+  refreshKeyState();
+});
+$("#key-clear").addEventListener("click", () => {
+  $("#api-key").value = "";
+  try { localStorage.removeItem(KEY_STORE); } catch (e) {}
+  refreshKeyState();
+});
+$("#api-key").addEventListener("input", refreshKeyState);
+
+function requireKey(out) {
+  if (!getKey()) {
+    out.innerHTML = errCard("Add your Anthropic API key in the field at the top first.");
+    return false;
+  }
+  return true;
+}
+
+// --- tab switching ---
+document.querySelectorAll(".tab").forEach((t) => {
+  t.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach((x) => x.classList.remove("active"));
+    t.classList.add("active");
+    const mode = t.dataset.mode;
+    $("#mode-text").classList.toggle("hidden", mode !== "text");
+    $("#mode-song").classList.toggle("hidden", mode !== "song");
+  });
+});
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function toneCard(clf) {
+  const conf = Math.round((clf.confidence || 0) * 100);
+  const chips = (clf.descriptors || []).map((d) => `<span class="chip">${escapeHtml(d)}</span>`).join("");
+  const secondary = clf.secondary_tone
+    ? `<div class="secondary">+ undercurrent of <b>${escapeHtml(clf.secondary_tone)}</b></div>` : "";
+  return `<div class="card">
+    <div class="eyebrow">Tone</div>
+    <div><span class="tone-name">${escapeHtml(clf.primary_tone)}</span> <span class="conf">· ${conf}% confidence</span></div>
+    <div class="tone-desc">${escapeHtml(clf.primary_description || "")}</div>
+    ${secondary}
+    <div class="chips">${chips}</div>
+    <div class="read">${escapeHtml(clf.rationale || "")}</div>
+  </div>`;
+}
+
+function errCard(msg) { return `<div class="err">${escapeHtml(msg)}</div>`; }
+
+function apiHeaders() {
+  return { "Content-Type": "application/json", "X-Anthropic-Key": getKey() };
+}
+
+async function postJSON(url, body) {
+  const r = await fetch(url, { method: "POST", headers: apiHeaders(), body: JSON.stringify(body) });
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.error || ("Request failed: " + r.status));
+  return data;
+}
+
+// --- MODE 1 ---
+$("#text-go").addEventListener("click", async () => {
+  const text = $("#text-in").value.trim();
+  const out = $("#text-results");
+  const btn = $("#text-go");
+  if (!text) { out.innerHTML = errCard("Please paste some writing first."); return; }
+  if (!requireKey(out)) return;
+  btn.disabled = true;
+  out.innerHTML = `<div class="spinner">Reading the vibe…</div>`;
+  try {
+    const clf = await postJSON("/api/classify", { kind: "text", text });
+    out.innerHTML = toneCard(clf) + `<div class="spinner">Finding a song that matches…</div>`;
+    const rec = await postJSON("/api/recommend", { text, classification: clf });
+    out.innerHTML = toneCard(clf) + `<div class="card">
+      <div class="eyebrow">Song</div>
+      <div><span class="song-title">${escapeHtml(rec.song.title)}</span> <span class="song-artist">— ${escapeHtml(rec.song.artist)}</span></div>
+      <div class="why">${escapeHtml(rec.explanation)}</div>
+    </div>`;
+  } catch (e) {
+    out.innerHTML += errCard(e.message);
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+// --- MODE 2 (streamed) ---
+$("#song-go").addEventListener("click", async () => {
+  const title = $("#song-title").value.trim();
+  const artist = $("#song-artist").value.trim();
+  const prompt = $("#song-prompt").value.trim();
+  const out = $("#song-results");
+  const btn = $("#song-go");
+  if (!title || !artist || !prompt) { out.innerHTML = errCard("Need a song title, artist, and a prompt."); return; }
+  if (!requireKey(out)) return;
+  btn.disabled = true;
+  out.innerHTML = `<div class="spinner">Reading the song's vibe…</div>`;
+  try {
+    const clf = await postJSON("/api/classify", { kind: "song", title, artist });
+    out.innerHTML = toneCard(clf) + `<div class="card"><div class="eyebrow">Your piece</div><div class="prose" id="prose"><span class="caret">▍</span></div></div>`;
+    const prose = $("#prose");
+
+    const r = await fetch("/api/write", {
+      method: "POST", headers: apiHeaders(),
+      body: JSON.stringify({ prompt, classification: clf, title, artist }),
+    });
+    if (!r.ok) {
+      const data = await r.json().catch(() => ({}));
+      throw new Error(data.error || ("Request failed: " + r.status));
+    }
+    const reader = r.body.getReader();
+    const dec = new TextDecoder();
+    let acc = "";
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      acc += dec.decode(value, { stream: true });
+      prose.innerHTML = escapeHtml(acc) + `<span class="caret">▍</span>`;
+    }
+    prose.innerHTML = escapeHtml(acc);
+  } catch (e) {
+    out.innerHTML += errCard(e.message);
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

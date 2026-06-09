@@ -1,0 +1,98 @@
+{
+  "melancholic": [
+    {"title": "Hurt", "artist": "Johnny Cash", "note": "a worn-down reckoning with regret and loss"},
+    {"title": "Mad World", "artist": "Gary Jules", "note": "muted, dreamlike despair"},
+    {"title": "The Night We Met", "artist": "Lord Huron", "note": "aching grief for a love that's gone"},
+    {"title": "Skinny Love", "artist": "Bon Iver", "note": "fragile, breaking sorrow"}
+  ],
+  "euphoric": [
+    {"title": "Don't Stop Me Now", "artist": "Queen", "note": "unstoppable, exhilarated joy"},
+    {"title": "Dog Days Are Over", "artist": "Florence + The Machine", "note": "ecstatic release and uplift"},
+    {"title": "Levels", "artist": "Avicii", "note": "soaring, weightless elation"},
+    {"title": "Mr. Brightside", "artist": "The Killers", "note": "breathless, racing high"}
+  ],
+  "tense": [
+    {"title": "Paranoid Android", "artist": "Radiohead", "note": "fractured dread that keeps shifting"},
+    {"title": "Seven Nation Army", "artist": "The White Stripes", "note": "menacing, marching pressure"},
+    {"title": "In the Air Tonight", "artist": "Phil Collins", "note": "slow-building, ominous suspense"},
+    {"title": "Smells Like Teen Spirit", "artist": "Nirvana", "note": "coiled, restless agitation"}
+  ],
+  "nostalgic": [
+    {"title": "Landslide", "artist": "Fleetwood Mac", "note": "tender reflection on time and change"},
+    {"title": "Vienna", "artist": "Billy Joel", "note": "warm, knowing look back on youth"},
+    {"title": "Bookends", "artist": "Simon & Garfunkel", "note": "memory kept like a photograph"},
+    {"title": "Yesterday", "artist": "The Beatles", "note": "longing for an easier past"}
+  ],
+  "serene": [
+    {"title": "Weightless", "artist": "Marconi Union", "note": "engineered, drifting calm"},
+    {"title": "Clair de Lune", "artist": "Claude Debussy", "note": "still, luminous peace"},
+    {"title": "Holocene", "artist": "Bon Iver", "note": "vast, quiet stillness"},
+    {"title": "Saturn", "artist": "Sleeping at Last", "note": "hushed, awed tranquility"}
+  ],
+  "defiant": [
+    {"title": "I Will Survive", "artist": "Gloria Gaynor", "note": "refusing to be broken"},
+    {"title": "Survivor", "artist": "Destiny's Child", "note": "standing tall against doubt"},
+    {"title": "Fighter", "artist": "Christina Aguilera", "note": "turning adversity into strength"},
+    {"title": "Stronger", "artist": "Kanye West", "note": "relentless, unbowed drive"}
+  ],
+  "romantic": [
+    {"title": "At Last", "artist": "Etta James", "note": "devotion finally arrived"},
+    {"title": "Make You Feel My Love", "artist": "Adele", "note": "unguarded tenderness"},
+    {"title": "Your Song", "artist": "Elton John", "note": "earnest, gentle affection"},
+    {"title": "Can't Help Falling in Love", "artist": "Elvis Presley", "note": "soft, inevitable devotion"}
+  ],
+  "anxious": [
+    {"title": "Idioteque", "artist": "Radiohead", "note": "panicked, jittery foreboding"},
+    {"title": "Breathe Me", "artist": "Sia", "note": "trembling, exposed unease"},
+    {"title": "Everything in Its Right Place", "artist": "Radiohead", "note": "uncanny, unsettled looping"},
+    {"title": "Pressure", "artist": "Billy Joel", "note": "mounting, frantic strain"}
+  ],
+  "triumphant": [
+    {"title": "We Are the Champions", "artist": "Queen", "note": "earned, anthemic victory"},
+    {"title": "Eye of the Tiger", "artist": "Survivor", "note": "rising to overcome"},
+    {"title": "Hall of Fame", "artist": "The Script", "note": "soaring belief in winning"},
+    {"title": "Glorious", "artist": "Macklemore", "note": "exultant, grateful arrival"}
+  ],
+  "wistful": [
+    {"title": "Fast Car", "artist": "Tracy Chapman", "note": "yearning for an escape that slips away"},
+    {"title": "The Sound of Silence", "artist": "Simon & Garfunkel", "note": "quiet, distant longing"},
+    {"title": "Re: Stacks", "artist": "Bon Iver", "note": "soft ache for what's gone"},
+    {"title": "Casimir Pulaski Day", "artist": "Sufjan Stevens", "note": "tender, mournful remembrance"}
+  ],
+  "brooding": [
+    {"title": "Black", "artist": "Pearl Jam", "note": "smouldering, inward grief"},
+    {"title": "Wicked Game", "artist": "Chris Isaak", "note": "dark, aching tension"},
+    {"title": "Heart-Shaped Box", "artist": "Nirvana", "note": "simmering, unsettled menace"},
+    {"title": "Climbing Up the Walls", "artist": "Radiohead", "note": "creeping, claustrophobic dread"}
+  ],
+  "playful": [
+    {"title": "Walking on Sunshine", "artist": "Katrina & The Waves", "note": "giddy, bouncing fun"},
+    {"title": "Hey Ya!", "artist": "OutKast", "note": "irreverent, restless delight"},
+    {"title": "Can't Stop the Feeling!", "artist": "Justin Timberlake", "note": "carefree, sunny bounce"},
+    {"title": "You Can Call Me Al", "artist": "Paul Simon", "note": "wry, light-footed whimsy"}
+  ],
+  "hopeful": [
+    {"title": "Here Comes the Sun", "artist": "The Beatles", "note": "light breaking after a long winter"},
+    {"title": "Beautiful Day", "artist": "U2", "note": "finding brightness despite it all"},
+    {"title": "Rise Up", "artist": "Andra Day", "note": "quiet promise of getting through"},
+    {"title": "I Can See Clearly Now", "artist": "Johnny Nash", "note": "obstacles lifting into clarity"}
+  ],
+  "somber": [
+    {"title": "Hallelujah", "artist": "Jeff Buckley", "note": "solemn, broken reverence"},
+    {"title": "Tears in Heaven", "artist": "Eric Clapton", "note": "grave mourning of a loss"},
+    {"title": "Nothing Compares 2 U", "artist": "Sinéad O'Connor", "note": "stark, weighted grief"},
+    {"title": "Asleep", "artist": "The Smiths", "note": "heavy, funereal stillness"}
+  ],
+  "energetic": [
+    {"title": "Uptown Funk", "artist": "Mark Ronson ft. Bruno Mars", "note": "strutting, kinetic groove"},
+    {"title": "Thunderstruck", "artist": "AC/DC", "note": "relentless, charging momentum"},
+    {"title": "Lose Yourself", "artist": "Eminem", "note": "driving, do-or-die propulsion"},
+    {"title": "Born to Run", "artist": "Bruce Springsteen", "note": "restless, full-throttle motion"}
+  ],
+  "bittersweet": [
+    {"title": "Someone Like You", "artist": "Adele", "note": "love and loss held together"},
+    {"title": "The Scientist", "artist": "Coldplay", "note": "tender regret wrapped in beauty"},
+    {"title": "In My Life", "artist": "The Beatles", "note": "gratitude shadowed by loss"},
+    {"title": "Vincent", "artist": "Don McLean", "note": "beauty inseparable from sorrow"}
+  ]
+}

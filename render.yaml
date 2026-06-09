@@ -1,0 +1,16 @@
+# Render blueprint — one-click deploy of the Vibe Writer web app.
+# In Render: New + → Blueprint → connect this repo. No secrets needed (the app is
+# bring-your-own-key: visitors supply their own Anthropic key in the browser).
+services:
+  - type: web
+    name: musicscribe
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # gthread worker (threads > 1) streams the Mode 2 generator fine; long timeout
+    # covers slower generations.
+    startCommand: gunicorn vibe_writer.web:app --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 120
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"

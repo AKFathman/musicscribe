@@ -1,0 +1,24 @@
+[project]
+name = "vibe-writer"
+version = "1.0.0"
+description = "Classify the tone of writing or a song, and connect the two through music."
+requires-python = ">=3.10"
+dependencies = [
+    "anthropic>=0.69",
+    "python-dotenv>=1.0",
+    "pydantic>=2.0",
+    "flask>=3.0",
+]
+
+[project.scripts]
+vibe-writer = "vibe_writer.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["vibe_writer"]
+
+[tool.setuptools.package-data]
+vibe_writer = ["data/*.json"]
